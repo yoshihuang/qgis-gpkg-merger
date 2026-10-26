@@ -4,9 +4,14 @@ jobs:
   test:
     name: GDAL tests + translations
     runs-on: ubuntu-24.04
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
-      - run: sudo apt-get update && sudo apt-get install -y python3-gdal qttools5-dev-tools
+      - name: install GDAL and Qt tools
+        timeout-minutes: 8
+        run: |
+          sudo apt-get -o Acquire::Retries=3 update
+          sudo apt-get -o Acquire::Retries=3 install -y --no-install-recommends python3-gdal qttools5-dev-tools
       - name: unit tests
         run: python3 -m unittest discover -s tests -v
       - name: translations up to date
@@ -15,6 +20,7 @@ jobs:
   qgis4:
     name: QGIS 4 (Qt6) – PyQGIS 4 checker + plugin tests
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     container:
       image: ghcr.io/qgis/pyqgis4-checker:main-ubuntu
     env:
