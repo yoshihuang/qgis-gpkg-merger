@@ -169,7 +169,7 @@
     </message>
     <message>
         <location filename="../dialog.py" line="397"/>
-        <location filename="../merge_core.py" line="404"/>
+        <location filename="../merge_core.py" line="373"/>
         <source>The output file must not be one of the input files.</source>
         <translation>輸出檔不可與輸入檔相同。</translation>
     </message>
@@ -270,17 +270,17 @@ Replace it?</source>
         <translation>無幾何</translation>
     </message>
     <message>
-        <location filename="../merge_core.py" line="397"/>
+        <location filename="../merge_core.py" line="366"/>
         <source>The merge plan contains errors; nothing was written.</source>
         <translation>合併計畫有錯誤，未寫入任何資料。</translation>
     </message>
     <message>
-        <location filename="../merge_core.py" line="399"/>
+        <location filename="../merge_core.py" line="368"/>
         <source>There is nothing to merge.</source>
         <translation>沒有可合併的圖層。</translation>
     </message>
     <message>
-        <location filename="../merge_core.py" line="507"/>
+        <location filename="../merge_core.py" line="457"/>
         <source>Done: {0}</source>
         <translation>完成：{0}</translation>
     </message>
@@ -343,24 +343,24 @@ Replace it?</source>
         <translation>「{1}」的圖層「{0}」改名為「{2}」</translation>
     </message>
     <message>
+        <location filename="../merge_core.py" line="437"/>
+        <source>Copying layer styles from '{0}'</source>
+        <translation>複製「{0}」的圖層樣式</translation>
+    </message>
+    <message>
         <location filename="../merge_core.py" line="329"/>
         <source>Layer '{0}' of '{1}' is overwritten by '{2}'</source>
         <translation>「{1}」的圖層「{0}」被「{2}」覆蓋</translation>
     </message>
     <message>
-        <location filename="../merge_core.py" line="441"/>
+        <location filename="../merge_core.py" line="410"/>
         <source>Copying '{0}' from '{1}' as '{2}'</source>
         <translation>複製「{1}」的「{0}」為「{2}」</translation>
     </message>
     <message>
-        <location filename="../merge_core.py" line="452"/>
+        <location filename="../merge_core.py" line="421"/>
         <source>Appending '{0}' from '{1}' to '{2}'</source>
         <translation>將「{1}」的「{0}」擴充至「{2}」</translation>
-    </message>
-    <message>
-        <location filename="../merge_core.py" line="475"/>
-        <source>Copying layer styles from '{0}'</source>
-        <translation>複製「{0}」的圖層樣式</translation>
     </message>
     <message>
         <location filename="../merge_core.py" line="341"/>
@@ -373,18 +373,18 @@ Replace it?</source>
         <translation>「{2}」中「{1}」的 {0} 筆圖徵擴充至圖層「{3}」</translation>
     </message>
     <message>
-        <location filename="../plugin.py" line="56"/>
+        <location filename="../plugin.py" line="54"/>
         <source>Merge GeoPackages…</source>
         <translation>合併 GeoPackage…</translation>
     </message>
     <message>
-        <location filename="../plugin.py" line="57"/>
+        <location filename="../plugin.py" line="55"/>
         <source>Merge several GeoPackage files into one</source>
         <translation>將多個 GeoPackage 檔合併為一個</translation>
     </message>
     <message>
-        <location filename="../plugin.py" line="59"/>
-        <location filename="../plugin.py" line="64"/>
+        <location filename="../plugin.py" line="57"/>
+        <location filename="../plugin.py" line="62"/>
         <source>&amp;GPKG Merger</source>
         <translation>&amp;GPKG Merger</translation>
     </message>

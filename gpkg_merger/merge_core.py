@@ -356,37 +356,6 @@ def build_plan(sources, mode):
 # ---------------------------------------------------------------------------
 # Execution
 # ---------------------------------------------------------------------------
-def _sql_str(text):
-    return "'" + text.replace("'", "''") + "'"
-
-
-def _sql_ident(text):
-    return '"' + text.replace('"', '""') + '"'
-
-
-def _style_sql(src_ds, mapping):
-    """SELECT statement copying the style rows of the mapped layers, with
-    f_table_name replaced by the output layer name."""
-    lyr = src_ds.GetLayerByName(STYLE_TABLE)
-    defn = lyr.GetLayerDefn()
-    cols = []
-    has_table_col = False
-    for i in range(defn.GetFieldCount()):
-        name = defn.GetFieldDefn(i).GetName()
-        if name.lower() == "f_table_name":
-            has_table_col = True
-            case = "CASE " + " ".join(
-                "WHEN f_table_name = {0} THEN {1}".format(_sql_str(k), _sql_str(v))
-                for k, v in mapping.items()) + " END AS f_table_name"
-            cols.append(case)
-        else:
-            cols.append(_sql_ident(name))
-    if not has_table_col:
-        return None
-    return "SELECT {0} FROM {1} WHERE f_table_name IN ({2})".format(
-        ", ".join(cols), STYLE_TABLE, ", ".join(_sql_str(k) for k in mapping))
-
-
 def execute_plan(plan, output_path, copy_styles=True, progress=None, log=None):
     """Write the output GeoPackage.
 
@@ -458,35 +427,16 @@ def execute_plan(plan, output_path, copy_styles=True, progress=None, log=None):
                         accessMode="append",
                         callback=_cb,
                     )
-                ds = _translate(tmp_path, src.path, opts)
-                ds = None
+                _translate(tmp_path, src.path, opts)  # dataset closed when released
                 created = True
                 state["done"] += 1
 
-            styles_created = False
             for si in style_jobs:
                 _check_cancel()
                 src = plan.sources[si]
-                src_ds = gdal.OpenEx(src.path, gdal.OF_VECTOR | gdal.OF_READONLY)
-                sql = _style_sql(src_ds, plan.style_maps[si])
-                fid_name = src_ds.GetLayerByName(STYLE_TABLE).GetFIDColumn() or "id"
-                src_ds = None
-                if sql:
-                    log(tr("Copying layer styles from '{0}'").format(os.path.basename(src.path)))
-                    opts = gdal.VectorTranslateOptions(
-                        format="GPKG",
-                        SQLStatement=sql,
-                        layerName=STYLE_TABLE,
-                        accessMode="append" if styles_created else "update",
-                        layerCreationOptions=None if styles_created else ["FID=" + fid_name],
-                        callback=_cb,
-                    )
-                    ds = _translate(tmp_path, src.path, opts)
-                    ds = None
-                    styles_created = True
+                log(tr("Copying layer styles from '{0}'").format(os.path.basename(src.path)))
+                _copy_styles(src.path, tmp_path, plan.style_maps[si])
                 state["done"] += 1
-            if styles_created:
-                _ensure_style_columns(tmp_path)
 
         if os.path.exists(output_path):
             os.remove(output_path)
@@ -510,24 +460,53 @@ def execute_plan(plan, output_path, copy_styles=True, progress=None, log=None):
 
 # Columns QGIS reads/writes in layer_styles (older files may lack some).
 _STYLE_COLUMNS = [
-    ("f_table_catalog", ogr.OFTString), ("f_table_schema", ogr.OFTString),
-    ("f_table_name", ogr.OFTString), ("f_geometry_column", ogr.OFTString),
-    ("styleName", ogr.OFTString), ("styleQML", ogr.OFTString),
-    ("styleSLD", ogr.OFTString), ("useAsDefault", ogr.OFTInteger),
-    ("description", ogr.OFTString), ("owner", ogr.OFTString),
-    ("ui", ogr.OFTString), ("update_time", ogr.OFTDateTime),
+    ("f_table_catalog", ogr.OFTString, ogr.OFSTNone),
+    ("f_table_schema", ogr.OFTString, ogr.OFSTNone),
+    ("f_table_name", ogr.OFTString, ogr.OFSTNone), ("f_geometry_column", ogr.OFTString, ogr.OFSTNone),
+    ("styleName", ogr.OFTString, ogr.OFSTNone), ("styleQML", ogr.OFTString, ogr.OFSTNone),
+    ("styleSLD", ogr.OFTString, ogr.OFSTNone), ("useAsDefault", ogr.OFTInteger, ogr.OFSTBoolean),
+    ("description", ogr.OFTString, ogr.OFSTNone), ("owner", ogr.OFTString, ogr.OFSTNone),
+    ("ui", ogr.OFTString, ogr.OFSTNone), ("update_time", ogr.OFTDateTime, ogr.OFSTNone),
 ]
 
 
-def _ensure_style_columns(path):
-    ds = gdal.OpenEx(path, gdal.OF_VECTOR | gdal.OF_UPDATE)
-    lyr = ds.GetLayerByName(STYLE_TABLE)
-    defn = lyr.GetLayerDefn()
-    have = {defn.GetFieldDefn(i).GetName().lower() for i in range(defn.GetFieldCount())}
-    for name, ftype in _STYLE_COLUMNS:
-        if name.lower() not in have:
-            lyr.CreateField(ogr.FieldDefn(name, ftype))
-    ds = None
+def _copy_styles(src_path, dst_path, mapping):
+    """Copy the layer_styles rows of the mapped layers with the OGR feature
+    API (no SQL), writing the output layer name into f_table_name."""
+    src_ds = gdal.OpenEx(src_path, gdal.OF_VECTOR | gdal.OF_READONLY)
+    s_lyr = src_ds.GetLayerByName(STYLE_TABLE)
+    s_defn = s_lyr.GetLayerDefn()
+    if s_defn.GetFieldIndex("f_table_name") < 0:
+        return
+    dst_ds = gdal.OpenEx(dst_path, gdal.OF_VECTOR | gdal.OF_UPDATE)
+    d_lyr = dst_ds.GetLayerByName(STYLE_TABLE)
+    if d_lyr is None:
+        d_lyr = dst_ds.CreateLayer(STYLE_TABLE, None, ogr.wkbNone, ["FID=id"])
+        for name, ftype, subtype in _STYLE_COLUMNS:
+            fd = ogr.FieldDefn(name, ftype)
+            fd.SetSubType(subtype)
+            d_lyr.CreateField(fd)
+    d_defn = d_lyr.GetLayerDefn()
+    have = {d_defn.GetFieldDefn(i).GetName().lower() for i in range(d_defn.GetFieldCount())}
+    for i in range(s_defn.GetFieldCount()):  # columns of newer QGIS versions
+        fd = s_defn.GetFieldDefn(i)
+        if fd.GetName().lower() not in have:
+            d_lyr.CreateField(fd)
+    d_defn = d_lyr.GetLayerDefn()
+
+    dst_ds.StartTransaction()
+    for feat in s_lyr:
+        table = feat.GetField("f_table_name")
+        if table not in mapping:
+            continue
+        out = ogr.Feature(d_defn)
+        out.SetFrom(feat)          # fields are matched by name
+        out.SetFID(ogr.NullFID)
+        out.SetField("f_table_name", mapping[table])
+        d_lyr.CreateFeature(out)
+    dst_ds.CommitTransaction()
+    dst_ds = None
+    src_ds = None
 
 
 def _translate(dst, src, opts):

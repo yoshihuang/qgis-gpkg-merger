@@ -17,12 +17,10 @@ PLUGIN_DIR = os.path.dirname(__file__)
 def qgis_locale():
     """The language QGIS itself is displayed in (Settings ▸ Options ▸ General
     ▸ Override system locale), falling back to the system locale."""
-    try:
+    if hasattr(QgsApplication, "locale"):
         loc = QgsApplication.locale()
         if loc:
             return loc
-    except Exception:
-        pass
     settings = QgsSettings()
     if settings.value("locale/overrideFlag", False, type=bool):
         loc = settings.value("locale/userLocale", "", type=str)

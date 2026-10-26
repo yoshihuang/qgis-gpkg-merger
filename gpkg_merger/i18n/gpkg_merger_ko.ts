@@ -169,7 +169,7 @@
     </message>
     <message>
         <location filename="../dialog.py" line="397"/>
-        <location filename="../merge_core.py" line="404"/>
+        <location filename="../merge_core.py" line="373"/>
         <source>The output file must not be one of the input files.</source>
         <translation>출력 파일은 입력 파일 중 하나일 수 없습니다.</translation>
     </message>
@@ -270,17 +270,17 @@ Replace it?</source>
         <translation>지오메트리 없음</translation>
     </message>
     <message>
-        <location filename="../merge_core.py" line="397"/>
+        <location filename="../merge_core.py" line="366"/>
         <source>The merge plan contains errors; nothing was written.</source>
         <translation>병합 계획에 오류가 있어 아무것도 저장되지 않았습니다.</translation>
     </message>
     <message>
-        <location filename="../merge_core.py" line="399"/>
+        <location filename="../merge_core.py" line="368"/>
         <source>There is nothing to merge.</source>
         <translation>병합할 항목이 없습니다.</translation>
     </message>
     <message>
-        <location filename="../merge_core.py" line="507"/>
+        <location filename="../merge_core.py" line="457"/>
         <source>Done: {0}</source>
         <translation>완료: {0}</translation>
     </message>
@@ -343,24 +343,24 @@ Replace it?</source>
         <translation>'{1}'의 레이어 '{0}' → '{2}'(으)로 이름 변경</translation>
     </message>
     <message>
+        <location filename="../merge_core.py" line="437"/>
+        <source>Copying layer styles from '{0}'</source>
+        <translation>'{0}'의 레이어 스타일 복사</translation>
+    </message>
+    <message>
         <location filename="../merge_core.py" line="329"/>
         <source>Layer '{0}' of '{1}' is overwritten by '{2}'</source>
         <translation>'{1}'의 레이어 '{0}'은(는) '{2}'(으)로 덮어씀</translation>
     </message>
     <message>
-        <location filename="../merge_core.py" line="441"/>
+        <location filename="../merge_core.py" line="410"/>
         <source>Copying '{0}' from '{1}' as '{2}'</source>
         <translation>'{1}'의 '{0}'을(를) '{2}'(으)로 복사</translation>
     </message>
     <message>
-        <location filename="../merge_core.py" line="452"/>
+        <location filename="../merge_core.py" line="421"/>
         <source>Appending '{0}' from '{1}' to '{2}'</source>
         <translation>'{1}'의 '{0}'을(를) '{2}'에 추가</translation>
-    </message>
-    <message>
-        <location filename="../merge_core.py" line="475"/>
-        <source>Copying layer styles from '{0}'</source>
-        <translation>'{0}'의 레이어 스타일 복사</translation>
     </message>
     <message>
         <location filename="../merge_core.py" line="341"/>
@@ -373,18 +373,18 @@ Replace it?</source>
         <translation>'{2}'의 '{1}' 피처 {0}개를 레이어 '{3}'에 추가</translation>
     </message>
     <message>
-        <location filename="../plugin.py" line="56"/>
+        <location filename="../plugin.py" line="54"/>
         <source>Merge GeoPackages…</source>
         <translation>GeoPackage 병합…</translation>
     </message>
     <message>
-        <location filename="../plugin.py" line="57"/>
+        <location filename="../plugin.py" line="55"/>
         <source>Merge several GeoPackage files into one</source>
         <translation>여러 GeoPackage 파일을 하나로 병합</translation>
     </message>
     <message>
-        <location filename="../plugin.py" line="59"/>
-        <location filename="../plugin.py" line="64"/>
+        <location filename="../plugin.py" line="57"/>
+        <location filename="../plugin.py" line="62"/>
         <source>&amp;GPKG Merger</source>
         <translation>&amp;GPKG Merger</translation>
     </message>

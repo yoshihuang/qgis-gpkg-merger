@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.1
+- Copy layer styles with the OGR feature API instead of SQL (security scan), create full QGIS layer_styles columns
+- Remove try/except/pass in locale detection
+
 ## 1.0.0
 - Ordered merge of several GeoPackages
 - Same-name layers: rename (`<gpkg>_<layer>`), overwrite (later wins), append (with geometry/CRS/field check)

@@ -169,7 +169,7 @@
     </message>
     <message>
         <location filename="../dialog.py" line="397"/>
-        <location filename="../merge_core.py" line="404"/>
+        <location filename="../merge_core.py" line="373"/>
         <source>The output file must not be one of the input files.</source>
         <translation>El archivo de salida no puede ser uno de los de entrada.</translation>
     </message>
@@ -270,17 +270,17 @@ Replace it?</source>
         <translation>Sin geometría</translation>
     </message>
     <message>
-        <location filename="../merge_core.py" line="397"/>
+        <location filename="../merge_core.py" line="366"/>
         <source>The merge plan contains errors; nothing was written.</source>
         <translation>El plan de combinación contiene errores; no se escribió nada.</translation>
     </message>
     <message>
-        <location filename="../merge_core.py" line="399"/>
+        <location filename="../merge_core.py" line="368"/>
         <source>There is nothing to merge.</source>
         <translation>No hay nada que combinar.</translation>
     </message>
     <message>
-        <location filename="../merge_core.py" line="507"/>
+        <location filename="../merge_core.py" line="457"/>
         <source>Done: {0}</source>
         <translation>Terminado: {0}</translation>
     </message>
@@ -343,24 +343,24 @@ Replace it?</source>
         <translation>Capa «{0}» de «{1}» renombrada a «{2}»</translation>
     </message>
     <message>
+        <location filename="../merge_core.py" line="437"/>
+        <source>Copying layer styles from '{0}'</source>
+        <translation>Copiando estilos de capa de «{0}»</translation>
+    </message>
+    <message>
         <location filename="../merge_core.py" line="329"/>
         <source>Layer '{0}' of '{1}' is overwritten by '{2}'</source>
         <translation>Capa «{0}» de «{1}» sobrescrita por «{2}»</translation>
     </message>
     <message>
-        <location filename="../merge_core.py" line="441"/>
+        <location filename="../merge_core.py" line="410"/>
         <source>Copying '{0}' from '{1}' as '{2}'</source>
         <translation>Copiando «{0}» de «{1}» como «{2}»</translation>
     </message>
     <message>
-        <location filename="../merge_core.py" line="452"/>
+        <location filename="../merge_core.py" line="421"/>
         <source>Appending '{0}' from '{1}' to '{2}'</source>
         <translation>Anexando «{0}» de «{1}» a «{2}»</translation>
-    </message>
-    <message>
-        <location filename="../merge_core.py" line="475"/>
-        <source>Copying layer styles from '{0}'</source>
-        <translation>Copiando estilos de capa de «{0}»</translation>
     </message>
     <message>
         <location filename="../merge_core.py" line="341"/>
@@ -373,18 +373,18 @@ Replace it?</source>
         <translation>{0} objetos de «{1}» en «{2}» anexados a la capa «{3}»</translation>
     </message>
     <message>
-        <location filename="../plugin.py" line="56"/>
+        <location filename="../plugin.py" line="54"/>
         <source>Merge GeoPackages…</source>
         <translation>Combinar GeoPackages…</translation>
     </message>
     <message>
-        <location filename="../plugin.py" line="57"/>
+        <location filename="../plugin.py" line="55"/>
         <source>Merge several GeoPackage files into one</source>
         <translation>Combinar varios archivos GeoPackage en uno</translation>
     </message>
     <message>
-        <location filename="../plugin.py" line="59"/>
-        <location filename="../plugin.py" line="64"/>
+        <location filename="../plugin.py" line="57"/>
+        <location filename="../plugin.py" line="62"/>
         <source>&amp;GPKG Merger</source>
         <translation>&amp;GPKG Merger</translation>
     </message>
