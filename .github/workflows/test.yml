@@ -1,0 +1,12 @@
+name: tests
+on: [push, pull_request]
+jobs:
+  test:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - run: sudo apt-get update && sudo apt-get install -y python3-gdal qttools5-dev-tools
+      - name: unit tests
+        run: python3 -m unittest discover -s tests -v
+      - name: translations up to date
+        run: python3 scripts/build_i18n.py && git diff --exit-code -- gpkg_merger/i18n/*.ts

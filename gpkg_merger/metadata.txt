@@ -1,0 +1,30 @@
+[general]
+name=GPKG Merger
+qgisMinimumVersion=3.22
+supportsQt6=True
+description=Merge several GeoPackage files into one, with a user-defined merge order and three ways to handle layers with the same name (rename, overwrite, append).
+description[zh_TW]=將多個 GeoPackage 合併為一個，可排定併入順序，同名圖層可選擇改名保留、依序複寫或擴充合併。
+about=Merge any number of GeoPackages into a new GeoPackage.
+    - Set the merge order by drag & drop or the up/down buttons.
+    - Layers with the same name (compared case-insensitively) can be:
+      * kept and renamed to <gpkg name>_<layer name>,
+      * overwritten – the file that comes later in the order wins,
+      * appended into one layer – geometry type, CRS and fields are checked first; if they do not match nothing is written and you can change the selection.
+    - A preview shows the result of every layer before merging.
+    - QGIS layer styles stored in the files (layer_styles) follow their layers.
+    - The user interface follows the QGIS language setting: English, Traditional Chinese, Simplified Chinese, Japanese, Korean, German, French, Spanish.
+    Uses only GDAL/OGR which ships with QGIS; no extra Python packages needed.
+version=1.0.0
+author=yoshi
+email=yoshi.hml@gmail.com
+tracker=https://github.com/YOUR_GITHUB_ID/qgis-gpkg-merger/issues
+repository=https://github.com/YOUR_GITHUB_ID/qgis-gpkg-merger
+homepage=https://github.com/YOUR_GITHUB_ID/qgis-gpkg-merger
+tags=geopackage,gpkg,merge,vector,layers,append,combine
+category=Vector
+icon=icon.png
+experimental=False
+deprecated=False
+hasProcessingProvider=no
+changelog=1.0.0
+    - First release: ordered merge, rename / overwrite / append modes, compatibility check, layer styles, 8 languages.
