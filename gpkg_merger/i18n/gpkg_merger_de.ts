@@ -373,18 +373,18 @@ Ersetzen?</translation>
         <translation>{0} Objekte von „{1}“ aus „{2}“ an Layer „{3}“ angehängt</translation>
     </message>
     <message>
-        <location filename="../plugin.py" line="54"/>
+        <location filename="../plugin.py" line="58"/>
         <source>Merge GeoPackages…</source>
         <translation>GeoPackages zusammenführen…</translation>
     </message>
     <message>
-        <location filename="../plugin.py" line="55"/>
+        <location filename="../plugin.py" line="59"/>
         <source>Merge several GeoPackage files into one</source>
         <translation>Mehrere GeoPackage-Dateien zu einer zusammenführen</translation>
     </message>
     <message>
-        <location filename="../plugin.py" line="57"/>
-        <location filename="../plugin.py" line="62"/>
+        <location filename="../plugin.py" line="61"/>
+        <location filename="../plugin.py" line="66"/>
         <source>&amp;GPKG Merger</source>
         <translation>&amp;GPKG Merger</translation>
     </message>

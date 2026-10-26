@@ -1,7 +1,7 @@
 [general]
 name=GPKG Merger
 qgisMinimumVersion=3.22
-supportsQt6=True
+qgisMaximumVersion=4.99
 description=Merge several GeoPackage files into one, with a user-defined merge order and three ways to handle layers with the same name (rename, overwrite, append).
 description[zh_TW]=將多個 GeoPackage 合併為一個，可排定併入順序，同名圖層可選擇改名保留、依序複寫或擴充合併。
 about=Merge any number of GeoPackages into a new GeoPackage.
@@ -13,8 +13,9 @@ about=Merge any number of GeoPackages into a new GeoPackage.
     - A preview shows the result of every layer before merging.
     - QGIS layer styles stored in the files (layer_styles) follow their layers.
     - The user interface follows the QGIS language setting: English, Traditional Chinese, Simplified Chinese, Japanese, Korean, German, French, Spanish.
+    Works with QGIS 3.22+ and QGIS 4 (Qt6).
     Uses only GDAL/OGR which ships with QGIS; no extra Python packages needed.
-version=1.0.1
+version=1.1.0
 author=yoshi
 email=yoshi.hml@gmail.com
 tracker=https://github.com/yoshihuang/qgis-gpkg-merger/issues
@@ -26,7 +27,9 @@ icon=icon.png
 experimental=False
 deprecated=False
 hasProcessingProvider=no
-changelog=1.0.1
+changelog=1.1.0
+    - QGIS 4 (Qt6) support: listed for QGIS 3.22 – 4.x, tested with QGIS 4 in CI.
+    1.0.1
     - Layer styles are copied with the OGR feature API instead of SQL; full QGIS layer_styles columns.
     - Code clean-up from the plugin repository security scan.
     1.0.0

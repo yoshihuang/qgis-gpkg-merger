@@ -373,18 +373,18 @@ Replace it?</source>
         <translation>{0} objetos de «{1}» en «{2}» anexados a la capa «{3}»</translation>
     </message>
     <message>
-        <location filename="../plugin.py" line="54"/>
+        <location filename="../plugin.py" line="58"/>
         <source>Merge GeoPackages…</source>
         <translation>Combinar GeoPackages…</translation>
     </message>
     <message>
-        <location filename="../plugin.py" line="55"/>
+        <location filename="../plugin.py" line="59"/>
         <source>Merge several GeoPackage files into one</source>
         <translation>Combinar varios archivos GeoPackage en uno</translation>
     </message>
     <message>
-        <location filename="../plugin.py" line="57"/>
-        <location filename="../plugin.py" line="62"/>
+        <location filename="../plugin.py" line="61"/>
+        <location filename="../plugin.py" line="66"/>
         <source>&amp;GPKG Merger</source>
         <translation>&amp;GPKG Merger</translation>
     </message>

@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.0
+- QGIS 4 / Qt6: `qgisMaximumVersion=4.99`, QAction imported from QtGui on Qt6
+- CI runs the PyQGIS 4 checker and the plugin tests inside QGIS 4
+
 ## 1.0.1
 - Copy layer styles with the OGR feature API instead of SQL (security scan), create full QGIS layer_styles columns
 - Remove try/except/pass in locale detection

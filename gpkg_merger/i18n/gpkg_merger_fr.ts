@@ -373,18 +373,18 @@ Le remplacer ?</translation>
         <translation>{0} entités de « {1} » (« {2} ») ajoutées à la couche « {3} »</translation>
     </message>
     <message>
-        <location filename="../plugin.py" line="54"/>
+        <location filename="../plugin.py" line="58"/>
         <source>Merge GeoPackages…</source>
         <translation>Fusionner des GeoPackages…</translation>
     </message>
     <message>
-        <location filename="../plugin.py" line="55"/>
+        <location filename="../plugin.py" line="59"/>
         <source>Merge several GeoPackage files into one</source>
         <translation>Fusionner plusieurs fichiers GeoPackage en un seul</translation>
     </message>
     <message>
-        <location filename="../plugin.py" line="57"/>
-        <location filename="../plugin.py" line="62"/>
+        <location filename="../plugin.py" line="61"/>
+        <location filename="../plugin.py" line="66"/>
         <source>&amp;GPKG Merger</source>
         <translation>&amp;GPKG Merger</translation>
     </message>

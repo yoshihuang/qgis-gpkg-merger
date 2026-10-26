@@ -373,18 +373,18 @@ Replace it?</source>
         <translation>「{2}」中「{1}」的 {0} 筆圖徵擴充至圖層「{3}」</translation>
     </message>
     <message>
-        <location filename="../plugin.py" line="54"/>
+        <location filename="../plugin.py" line="58"/>
         <source>Merge GeoPackages…</source>
         <translation>合併 GeoPackage…</translation>
     </message>
     <message>
-        <location filename="../plugin.py" line="55"/>
+        <location filename="../plugin.py" line="59"/>
         <source>Merge several GeoPackage files into one</source>
         <translation>將多個 GeoPackage 檔合併為一個</translation>
     </message>
     <message>
-        <location filename="../plugin.py" line="57"/>
-        <location filename="../plugin.py" line="62"/>
+        <location filename="../plugin.py" line="61"/>
+        <location filename="../plugin.py" line="66"/>
         <source>&amp;GPKG Merger</source>
         <translation>&amp;GPKG Merger</translation>
     </message>

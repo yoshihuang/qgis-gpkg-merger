@@ -1,7 +1,8 @@
 name: tests
-on: [push, pull_request]
+on: [push, pull_request, workflow_dispatch]
 jobs:
   test:
+    name: GDAL tests + translations
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
@@ -10,3 +11,26 @@ jobs:
         run: python3 -m unittest discover -s tests -v
       - name: translations up to date
         run: python3 scripts/build_i18n.py && git diff --exit-code -- gpkg_merger/i18n/*.ts
+
+  qgis4:
+    name: QGIS 4 (Qt6) – PyQGIS 4 checker + plugin tests
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/qgis/pyqgis4-checker:main-ubuntu
+    env:
+      QT_QPA_PLATFORM: offscreen
+    steps:
+      - uses: actions/checkout@v4
+      - name: versions
+        run: |
+          qgis --version || true
+          python3 -c "from qgis.core import Qgis; from qgis.PyQt.QtCore import QT_VERSION_STR; print('QGIS', Qgis.version(), 'Qt', QT_VERSION_STR)"
+      - name: PyQGIS 4 migration check
+        run: |
+          pyqt5_to_pyqt6.py --dry_run --logfile pyqt6_checker.log gpkg_merger/
+          cat pyqt6_checker.log || true
+          # fails if anything would need to be changed
+          pyqt5_to_pyqt6.py gpkg_merger/
+          git diff --exit-code -- gpkg_merger/
+      - name: plugin tests inside QGIS 4
+        run: python3 -m unittest discover -s tests -v

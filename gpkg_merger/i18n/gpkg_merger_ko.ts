@@ -373,18 +373,18 @@ Replace it?</source>
         <translation>'{2}'의 '{1}' 피처 {0}개를 레이어 '{3}'에 추가</translation>
     </message>
     <message>
-        <location filename="../plugin.py" line="54"/>
+        <location filename="../plugin.py" line="58"/>
         <source>Merge GeoPackages…</source>
         <translation>GeoPackage 병합…</translation>
     </message>
     <message>
-        <location filename="../plugin.py" line="55"/>
+        <location filename="../plugin.py" line="59"/>
         <source>Merge several GeoPackage files into one</source>
         <translation>여러 GeoPackage 파일을 하나로 병합</translation>
     </message>
     <message>
-        <location filename="../plugin.py" line="57"/>
-        <location filename="../plugin.py" line="62"/>
+        <location filename="../plugin.py" line="61"/>
+        <location filename="../plugin.py" line="66"/>
         <source>&amp;GPKG Merger</source>
         <translation>&amp;GPKG Merger</translation>
     </message>

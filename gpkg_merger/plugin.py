@@ -7,7 +7,11 @@ import os
 from qgis.core import QgsApplication, QgsSettings
 from qgis.PyQt.QtCore import QCoreApplication, QLocale, QTranslator
 from qgis.PyQt.QtGui import QIcon
-from qgis.PyQt.QtWidgets import QAction
+
+try:  # Qt6 / QGIS 4: QAction lives in QtGui
+    from qgis.PyQt.QtGui import QAction
+except ImportError:  # Qt5 / QGIS 3
+    from qgis.PyQt.QtWidgets import QAction
 
 from .i18n_util import normalize_locale, tr
 
