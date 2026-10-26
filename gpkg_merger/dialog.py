@@ -3,7 +3,7 @@
 
 import os
 
-from qgis.core import QgsProject, QgsSettings, QgsVectorLayer
+from qgis.core import QgsProject, QgsRasterLayer, QgsSettings, QgsVectorLayer
 from qgis.gui import QgsFileWidget
 from qgis.PyQt.QtCore import Qt, pyqtSignal
 from qgis.PyQt.QtGui import QBrush, QColor
@@ -105,12 +105,13 @@ class GpkgMergerDialog(QDialog):
         splitter.addWidget(box_in)
 
         # 2. layer preview
-        box_layers = QGroupBox(tr("2. Layers and result preview"))
+        box_layers = QGroupBox(tr("2. Contents and result preview"))
         lay_layers = QVBoxLayout(box_layers)
         self.tree = QTreeWidget()
-        self.tree.setHeaderLabels([tr("Layer"), tr("Geometry"), tr("CRS"),
-                                   tr("Features"), tr("Result")])
-        self.tree.header().setSectionResizeMode(0, QHeaderView.ResizeMode.ResizeToContents)
+        self.tree.setHeaderLabels([tr("Layer"), tr("Type"), tr("CRS"),
+                                   tr("Count"), tr("Result")])
+        for col in range(4):
+            self.tree.header().setSectionResizeMode(col, QHeaderView.ResizeMode.ResizeToContents)
         self.tree.header().setStretchLastSection(True)
         lay_layers.addWidget(self.tree)
         self.lbl_summary = QLabel()
@@ -158,7 +159,9 @@ class GpkgMergerDialog(QDialog):
         self.log.setReadOnly(True)
         self.log.setMaximumBlockCount(5000)
         splitter.addWidget(self.log)
-        splitter.setSizes([140, 320, 120, 100])
+        splitter.setSizes([110, 370, 120, 90])
+        for index, stretch in enumerate((1, 4, 0, 1)):
+            splitter.setStretchFactor(index, stretch)
 
         # bottom row
         bottom = QHBoxLayout()
@@ -307,6 +310,8 @@ class GpkgMergerDialog(QDialog):
         error_layers = set()
         if plan.mode == mc.MODE_APPEND:
             for key, occ in conflicts.items():
+                if not all(lyr.is_vector for _si, lyr in occ):
+                    continue
                 base = occ[0][1]
                 for si, lyr in occ[1:]:
                     if mc.check_compatible(base, lyr):
@@ -330,13 +335,27 @@ class GpkgMergerDialog(QDialog):
                 is_conflict = lyr.name.lower() in conflicts
                 if is_conflict and color is None:
                     color = COLOR_CONFLICT
+                count = "" if lyr.feature_count is None else str(lyr.feature_count)
                 child = QTreeWidgetItem([lyr.name, lyr.geom_type_name, lyr.srs_name,
-                                         str(lyr.feature_count), text])
+                                         count, text])
                 if color is not None:
                     for c in range(5):
                         child.setForeground(c, QBrush(color))
                 if is_conflict:
                     child.setToolTip(0, tr("This layer name exists in more than one file."))
+                top.addChild(child)
+            for name in src.projects:
+                out = [o for psi, n, o in plan.project_steps if psi == si and n == name]
+                if not out:
+                    text, color = tr("dropped (overwritten by a later file)"), COLOR_DROPPED
+                elif out[0] != name:
+                    text, color = tr("rename to '{0}'").format(out[0]), COLOR_CONFLICT
+                else:
+                    text, color = tr("copy"), None
+                child = QTreeWidgetItem([name, tr("QGIS project"), "", "", text])
+                if color is not None:
+                    for c in range(5):
+                        child.setForeground(c, QBrush(color))
                 top.addChild(child)
             for name, reason in src.skipped:
                 child = QTreeWidgetItem([name, "", "", "", tr("skipped: {0}").format(reason)])
@@ -345,8 +364,8 @@ class GpkgMergerDialog(QDialog):
                 top.addChild(child)
             top.setExpanded(True)
 
-        parts = [tr("{0} files, {1} output layers, {2} duplicate layer names.").format(
-            len(sources), len(plan.output_layers), len(conflicts))]
+        parts = [tr("{0} files, {1} output objects, {2} QGIS projects, {3} duplicate names.").format(
+            len(sources), len(plan.output_layers), len(plan.project_steps), len(conflicts))]
         if plan.errors:
             parts.append(tr("Append is not possible – change the order, remove files or "
                             "choose another option."))
@@ -453,6 +472,9 @@ class GpkgMergerDialog(QDialog):
 
         if self.chk_load.isChecked():
             self._load_result(out, layers)
+        if plan.project_steps:
+            self._log(tr("QGIS projects were merged as well. Open them with "
+                         "Project ▸ Open From ▸ GeoPackage."))
         self.iface.messageBar().pushSuccess(
             tr("GPKG Merger"),
             tr("{0} layers written to {1}").format(len(layers), out))
@@ -469,15 +491,24 @@ class GpkgMergerDialog(QDialog):
         if ids:
             proj.removeMapLayers(ids)
 
-    def _load_result(self, path, layers):
+    def _load_result(self, path, objects):
+        """Add vector layers and rasters (not plain tables / views) to the
+        current project."""
         proj = QgsProject.instance()
         root = proj.layerTreeRoot()
-        group = root.insertGroup(0, os.path.splitext(os.path.basename(path))[0])
-        for name in layers:
-            vl = QgsVectorLayer(u"{0}|layername={1}".format(path, name), name, "ogr")
-            if vl.isValid():
-                proj.addMapLayer(vl, False)
-                group.addLayer(vl)
+        group = None
+        for name, kind in objects:
+            if kind in mc.VECTOR_KINDS:
+                layer = QgsVectorLayer(u"{0}|layername={1}".format(path, name), name, "ogr")
+            elif kind == mc.KIND_TILES:
+                layer = QgsRasterLayer(u"GPKG:{0}:{1}".format(path, name), name, "gdal")
+            else:
+                continue
+            if layer.isValid():
+                if group is None:
+                    group = root.insertGroup(0, os.path.splitext(os.path.basename(path))[0])
+                proj.addMapLayer(layer, False)
+                group.addLayer(layer)
             else:
                 self._log(tr("Could not load layer '{0}'").format(name))
 

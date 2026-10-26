@@ -2,9 +2,11 @@
 name=GPKG Merger
 qgisMinimumVersion=3.22
 qgisMaximumVersion=4.99
-description=Merge several GeoPackage files into one, with a user-defined merge order and three ways to handle layers with the same name (rename, overwrite, append).
-description[zh_TW]=將多個 GeoPackage 合併為一個，可排定併入順序，同名圖層可選擇改名保留、依序複寫或擴充合併。
-about=Merge any number of GeoPackages into a new GeoPackage.
+description=Merge several GeoPackage files – layers, rasters, tables, styles, metadata and QGIS projects – into one, with a user-defined merge order and three ways to handle objects with the same name (rename, overwrite, append).
+description[zh_TW]=將多個 GeoPackage 的所有內容（圖層、網格、資料表、樣式、中繼資料、QGIS 專案）合併為一個，可排定併入順序，同名物件可選擇改名保留、依序複寫或擴充合併。
+about=Merge any number of GeoPackages – with everything stored in them – into a new GeoPackage.
+    - Copies vector and attribute layers (with field aliases, comments and value domains), raster tiles, DEMs (gridded coverages), vector tiles, plain tables, views, metadata, related-table relations, QGIS layer styles and QGIS projects.
+    - QGIS projects stored in the files are redirected to the merged file, including renamed layers.
     - Set the merge order by drag & drop or the up/down buttons.
     - Layers with the same name (compared case-insensitively) can be:
       * kept and renamed to <gpkg name>_<layer name>,
@@ -15,19 +17,22 @@ about=Merge any number of GeoPackages into a new GeoPackage.
     - The user interface follows the QGIS language setting: English, Traditional Chinese, Simplified Chinese, Japanese, Korean, German, French, Spanish.
     Works with QGIS 3.22+ and QGIS 4 (Qt6).
     Uses only GDAL/OGR which ships with QGIS; no extra Python packages needed.
-version=1.1.0
+version=1.2.0
 author=yoshi
 email=yoshi.hml@gmail.com
 tracker=https://github.com/yoshihuang/qgis-gpkg-merger/issues
 repository=https://github.com/yoshihuang/qgis-gpkg-merger
 homepage=https://github.com/yoshihuang/qgis-gpkg-merger
-tags=geopackage,gpkg,merge,vector,layers,append,combine
+tags=geopackage,gpkg,merge,vector,raster,project,layers,append,combine
 category=Vector
 icon=icon.png
 experimental=False
 deprecated=False
 hasProcessingProvider=no
-changelog=1.1.0
+changelog=1.2.0
+    - Merges the complete GeoPackage: raster tiles, DEM (gridded coverage), vector tiles, plain tables, views, metadata, relations and QGIS projects stored in the file.
+    - Stored QGIS projects are redirected to the merged file and follow renamed layers.
+    1.1.0
     - QGIS 4 (Qt6) support: listed for QGIS 3.22 – 4.x, tested with QGIS 4 in CI.
     1.0.1
     - Layer styles are copied with the OGR feature API instead of SQL; full QGIS layer_styles columns.

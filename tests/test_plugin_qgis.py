@@ -27,6 +27,8 @@ _APP = None
 def _app():
     global _APP
     if _APP is None:
+        _APP = QgsApplication.instance()   # another test module may have one
+    if _APP is None:
         os.environ.setdefault("QT_QPA_PLATFORM", "offscreen")
         _APP = QgsApplication([], True)
         _APP.initQgis()
@@ -125,6 +127,33 @@ class PluginTests(unittest.TestCase):
         dlg._move(-1)
         self.assertEqual(os.path.basename(dlg.paths()[0]), "site-B.gpkg")
         self.assertGreater(len(QgsProject.instance().mapLayers()), 0)
+        plugin.unload()
+
+    def test_dialog_full_content(self):
+        from rich_fixture import make_rich_gpkg
+        a = make_rich_gpkg(os.path.join(self.tmp, "rich_a.gpkg"))
+        b = make_rich_gpkg(os.path.join(self.tmp, "rich_b.gpkg"), x0=251000.0)
+        plugin = self._plugin("zh-Hant")
+        plugin.run()
+        dlg = plugin.dialog
+        dlg._add_files([a, b])
+        dlg.rb_rename.setChecked(True)
+        dlg._refresh()
+        top = dlg.tree.topLevelItem(0)
+        rows = {top.child(i).text(0): top.child(i).text(1) for i in range(top.childCount())}
+        self.assertEqual(rows["survey"], "QGIS 專案")
+        self.assertEqual(rows["ortho"], "網格（圖磚）")
+        self.assertEqual(rows["v_core"], "檢視表")
+        dlg.file_out.setFilePath(self.out)
+        dlg.show()
+        QgsApplication.processEvents()
+        shot = os.environ.get("GPKG_MERGER_SCREENSHOT")
+        if shot:
+            dlg.grab().save(shot)
+        dlg._run()
+        names = {lyr.name() for lyr in QgsProject.instance().mapLayers().values()}
+        self.assertIn("rich_a_ortho", names)       # rasters are loaded too
+        self.assertIn("rich_b_boreholes", names)
         plugin.unload()
 
 
