@@ -23,16 +23,17 @@ jobs:
     timeout-minutes: 25
     defaults:
       run:
-        shell: bash -el {0}
+        shell: bash -el {0}  # activates the micromamba environment
     steps:
       - uses: actions/checkout@v4
-      - uses: conda-incubator/setup-miniconda@v3
+      - uses: mamba-org/setup-micromamba@v2
         with:
-          miniforge-version: latest
-          python-version: "3.12"
-          activate-environment: gpkg
-      - name: install GDAL
-        run: conda install -y -c conda-forge gdal
+          environment-name: gpkg
+          create-args: >-
+            -c conda-forge
+            python=3.12
+            gdal
+          init-shell: bash
       - name: versions
         run: |
           python -c "import sqlite3; print('sqlite', sqlite3.sqlite_version, [o for (o,) in sqlite3.connect(':memory:').execute('PRAGMA compile_options') if 'URI' in o])"
