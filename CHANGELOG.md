@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.2.1
+- Fix "unable to open database: file:///…?mode=ro" on Windows: the SQLite bundled with QGIS on Windows only accepts file: URIs on connections opened in URI mode; network paths fall back to plain file names
+- CI: Windows job
+
 ## 1.2.0
 - Merge the complete GeoPackage, not only vector layers: raster tiles, DEM (2D gridded coverage), vector tiles, plain SQLite tables, views (table names rewritten), metadata (incl. QGIS layer metadata), related-table relations and QGIS projects
 - QGIS projects stored in a GeoPackage are redirected to the merged file; layer sources follow renamed / overwritten / appended layers

@@ -218,9 +218,27 @@ class Plan(object):
 # ---------------------------------------------------------------------------
 # Scanning
 # ---------------------------------------------------------------------------
+def _ro_uri(path):
+    return pathlib.Path(os.path.abspath(path)).as_uri() + "?mode=ro"
+
+
 def _sqlite_ro(path):
-    uri = pathlib.Path(os.path.abspath(path)).as_uri() + "?mode=ro"
-    return sqlite3.connect(uri, uri=True)
+    """Open a GeoPackage read-only.  Falls back to a plain path where a file:
+    URI cannot be used (e.g. Windows network paths \\\\server\\share)."""
+    try:
+        return sqlite3.connect(_ro_uri(path), uri=True)
+    except sqlite3.Error:
+        return sqlite3.connect(os.path.abspath(path))
+
+
+def _attach_source(con, path):
+    """ATTACH an input GeoPackage as schema ``src`` (read-only when possible).
+    *con* must be opened with uri=True: SQLite builds without SQLITE_USE_URI
+    (Python in QGIS on Windows) treat 'file:' as a plain file name otherwise."""
+    try:
+        con.execute("ATTACH DATABASE ? AS src", (_ro_uri(path),))
+    except sqlite3.Error:
+        con.execute("ATTACH DATABASE ? AS src", (os.path.abspath(path),))
 
 
 def scan_gpkg(path):
@@ -623,7 +641,8 @@ def execute_plan(plan, output_path, copy_styles=True, progress=None, log=None):
 
 
 def _copy_raw(plan, tmp_path, output_path, log, check_cancel, state):
-    con = sqlite3.connect(tmp_path, isolation_level=None)
+    # uri=True enables file: URIs in ATTACH on every SQLite build
+    con = sqlite3.connect(os.path.abspath(tmp_path), isolation_level=None, uri=True)
     try:
         con.execute("PRAGMA foreign_keys = OFF")
         srs = gx.SrsMapper(con)
@@ -634,8 +653,7 @@ def _copy_raw(plan, tmp_path, output_path, log, check_cancel, state):
             steps = [s for s in plan.steps if s.source_index == si and s.action == Step.CREATE]
             mapping = dict(plan.table_maps[si])
             kept = {s.src_layer.lower() for s in steps}
-            con.execute("ATTACH DATABASE ? AS src",
-                        (pathlib.Path(os.path.abspath(src.path)).as_uri() + "?mode=ro",))
+            _attach_source(con, src.path)
             srs.reset()
             md_maps[si] = {}
             try:
@@ -676,8 +694,7 @@ def _copy_raw(plan, tmp_path, output_path, log, check_cancel, state):
 
         for si, step in views:
             src = plan.sources[si]
-            con.execute("ATTACH DATABASE ? AS src",
-                        (pathlib.Path(os.path.abspath(src.path)).as_uri() + "?mode=ro",))
+            _attach_source(con, src.path)
             try:
                 err = gx.create_view(con, step.src_layer, step.out_name, plan.table_maps[si])
             finally:

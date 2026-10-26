@@ -17,6 +17,29 @@ jobs:
       - name: translations up to date
         run: python3 scripts/build_i18n.py && git diff --exit-code -- gpkg_merger/i18n/*.ts
 
+  windows:
+    name: Windows – merge engine (GDAL from conda-forge)
+    runs-on: windows-latest
+    timeout-minutes: 25
+    defaults:
+      run:
+        shell: bash -el {0}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: conda-incubator/setup-miniconda@v3
+        with:
+          miniforge-version: latest
+          python-version: "3.12"
+          activate-environment: gpkg
+      - name: install GDAL
+        run: conda install -y -c conda-forge gdal
+      - name: versions
+        run: |
+          python -c "import sqlite3; print('sqlite', sqlite3.sqlite_version, [o for (o,) in sqlite3.connect(':memory:').execute('PRAGMA compile_options') if 'URI' in o])"
+          python -c "from osgeo import gdal; print('GDAL', gdal.__version__)"
+      - name: unit tests
+        run: python -m unittest discover -s tests -v
+
   qgis4:
     name: QGIS 4 (Qt6) – PyQGIS 4 checker + plugin tests
     runs-on: ubuntu-latest

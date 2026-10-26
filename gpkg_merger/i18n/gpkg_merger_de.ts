@@ -169,7 +169,7 @@
     </message>
     <message>
         <location filename="../dialog.py" line="416"/>
-        <location filename="../merge_core.py" line="529"/>
+        <location filename="../merge_core.py" line="547"/>
         <source>The output file must not be one of the input files.</source>
         <translation>Die Ausgabedatei darf keine der Eingabedateien sein.</translation>
     </message>
@@ -298,12 +298,12 @@ Ersetzen?</translation>
         <translation>Keine Geometrie</translation>
     </message>
     <message>
-        <location filename="../merge_core.py" line="522"/>
+        <location filename="../merge_core.py" line="540"/>
         <source>The merge plan contains errors; nothing was written.</source>
         <translation>Der Zusammenführungsplan enthält Fehler; es wurde nichts geschrieben.</translation>
     </message>
     <message>
-        <location filename="../merge_core.py" line="524"/>
+        <location filename="../merge_core.py" line="542"/>
         <source>There is nothing to merge.</source>
         <translation>Es gibt nichts zusammenzuführen.</translation>
     </message>
@@ -318,137 +318,137 @@ Ersetzen?</translation>
         <translation>Vektorkacheln</translation>
     </message>
     <message>
-        <location filename="../merge_core.py" line="621"/>
+        <location filename="../merge_core.py" line="639"/>
         <source>Done: {0}</source>
         <translation>Fertig: {0}</translation>
     </message>
     <message>
-        <location filename="../merge_core.py" line="360"/>
+        <location filename="../merge_core.py" line="378"/>
         <source>geometry type differs ({0} vs {1})</source>
         <translation>Geometrietyp unterschiedlich ({0} / {1})</translation>
     </message>
     <message>
-        <location filename="../merge_core.py" line="365"/>
-        <location filename="../merge_core.py" line="368"/>
+        <location filename="../merge_core.py" line="383"/>
+        <location filename="../merge_core.py" line="386"/>
         <source>coordinate reference system differs ({0} vs {1})</source>
         <translation>Koordinatenbezugssystem unterschiedlich ({0} / {1})</translation>
     </message>
     <message>
-        <location filename="../merge_core.py" line="366"/>
-        <location filename="../merge_core.py" line="366"/>
+        <location filename="../merge_core.py" line="384"/>
+        <location filename="../merge_core.py" line="384"/>
         <source>none</source>
         <translation>keines</translation>
     </message>
     <message>
-        <location filename="../merge_core.py" line="376"/>
+        <location filename="../merge_core.py" line="394"/>
         <source>missing fields: {0}</source>
         <translation>fehlende Felder: {0}</translation>
     </message>
     <message>
-        <location filename="../merge_core.py" line="378"/>
+        <location filename="../merge_core.py" line="396"/>
         <source>extra fields: {0}</source>
         <translation>zusätzliche Felder: {0}</translation>
     </message>
     <message>
-        <location filename="../merge_core.py" line="716"/>
+        <location filename="../merge_core.py" line="733"/>
         <source>Copying QGIS project '{0}' from '{1}' as '{2}'</source>
         <translation>Kopiere QGIS-Projekt „{0}“ aus „{1}“ als „{2}“</translation>
     </message>
     <message>
-        <location filename="../merge_core.py" line="236"/>
-        <location filename="../merge_core.py" line="281"/>
-        <location filename="../merge_core.py" line="327"/>
-        <location filename="../merge_core.py" line="234"/>
+        <location filename="../merge_core.py" line="254"/>
+        <location filename="../merge_core.py" line="299"/>
+        <location filename="../merge_core.py" line="345"/>
+        <location filename="../merge_core.py" line="252"/>
         <source>Cannot open GeoPackage: {0}</source>
         <translation>GeoPackage kann nicht geöffnet werden: {0}</translation>
     </message>
     <message>
-        <location filename="../merge_core.py" line="381"/>
+        <location filename="../merge_core.py" line="399"/>
         <source>field '{0}' type differs ({1} vs {2})</source>
         <translation>Feldtyp von „{0}“ unterschiedlich ({1} / {2})</translation>
     </message>
     <message>
-        <location filename="../merge_core.py" line="461"/>
+        <location filename="../merge_core.py" line="479"/>
         <source>only vector and attribute layers can be appended</source>
         <translation>nur Vektor- und Attributlayer können angehängt werden</translation>
     </message>
     <message>
-        <location filename="../merge_core.py" line="506"/>
+        <location filename="../merge_core.py" line="524"/>
         <source>Skipped '{0}' in '{1}': {2}</source>
         <translation>„{0}“ in „{1}“ übersprungen: {2}</translation>
     </message>
     <message>
-        <location filename="../merge_core.py" line="438"/>
+        <location filename="../merge_core.py" line="456"/>
         <source>Layer '{0}' of '{1}' renamed to '{2}'</source>
         <translation>Layer „{0}“ aus „{1}“ umbenannt in „{2}“</translation>
     </message>
     <message>
-        <location filename="../merge_core.py" line="598"/>
+        <location filename="../merge_core.py" line="616"/>
         <source>Copying layer styles from '{0}'</source>
         <translation>Kopiere Layerstile aus „{0}“</translation>
     </message>
     <message>
-        <location filename="../merge_core.py" line="686"/>
+        <location filename="../merge_core.py" line="703"/>
         <source>View '{0}' of '{1}' could not be re-created and was skipped: {2}</source>
         <translation>Sicht „{0}“ aus „{1}“ konnte nicht neu erstellt werden und wurde übersprungen: {2}</translation>
     </message>
     <message>
-        <location filename="../merge_core.py" line="689"/>
+        <location filename="../merge_core.py" line="706"/>
         <source>Copying view '{0}' from '{1}' as '{2}'</source>
         <translation>Kopiere Sicht „{0}“ aus „{1}“ als „{2}“</translation>
     </message>
     <message>
-        <location filename="../merge_core.py" line="456"/>
+        <location filename="../merge_core.py" line="474"/>
         <source>Layer '{0}' of '{1}' is overwritten by '{2}'</source>
         <translation>Layer „{0}“ aus „{1}“ wird durch „{2}“ überschrieben</translation>
     </message>
     <message>
-        <location filename="../merge_core.py" line="495"/>
+        <location filename="../merge_core.py" line="513"/>
         <source>Project '{0}' of '{1}' is overwritten by '{2}'</source>
         <translation>Projekt „{0}“ aus „{1}“ wird durch „{2}“ überschrieben</translation>
     </message>
     <message>
-        <location filename="../merge_core.py" line="501"/>
+        <location filename="../merge_core.py" line="519"/>
         <source>Project '{0}' of '{1}' renamed to '{2}'</source>
         <translation>Projekt „{0}“ aus „{1}“ umbenannt in „{2}“</translation>
     </message>
     <message>
-        <location filename="../merge_core.py" line="567"/>
+        <location filename="../merge_core.py" line="585"/>
         <source>Copying '{0}' from '{1}' as '{2}'</source>
         <translation>Kopiere „{0}“ aus „{1}“ als „{2}“</translation>
     </message>
     <message>
-        <location filename="../merge_core.py" line="578"/>
+        <location filename="../merge_core.py" line="596"/>
         <source>Appending '{0}' from '{1}' to '{2}'</source>
         <translation>Hänge „{0}“ aus „{1}“ an „{2}“ an</translation>
     </message>
     <message>
-        <location filename="../merge_core.py" line="665"/>
+        <location filename="../merge_core.py" line="683"/>
         <source>Copying relations from '{0}'</source>
         <translation>Kopiere Beziehungen aus „{0}“</translation>
     </message>
     <message>
-        <location filename="../merge_core.py" line="645"/>
+        <location filename="../merge_core.py" line="663"/>
         <source>Copying raster '{0}' from '{1}' as '{2}'</source>
         <translation>Kopiere Raster „{0}“ aus „{1}“ als „{2}“</translation>
     </message>
     <message>
-        <location filename="../merge_core.py" line="659"/>
+        <location filename="../merge_core.py" line="677"/>
         <source>Index or trigger skipped: {0}</source>
         <translation>Index oder Trigger übersprungen: {0}</translation>
     </message>
     <message>
-        <location filename="../merge_core.py" line="470"/>
+        <location filename="../merge_core.py" line="488"/>
         <source>Layer '{0}': '{1}' cannot be appended to '{2}': {3}</source>
         <translation>Layer „{0}“: „{1}“ kann nicht an „{2}“ angehängt werden: {3}</translation>
     </message>
     <message>
-        <location filename="../merge_core.py" line="474"/>
+        <location filename="../merge_core.py" line="492"/>
         <source>{0} features of '{1}' in '{2}' appended to layer '{3}'</source>
         <translation>{0} Objekte von „{1}“ aus „{2}“ an Layer „{3}“ angehängt</translation>
     </message>
     <message>
-        <location filename="../merge_core.py" line="650"/>
+        <location filename="../merge_core.py" line="668"/>
         <source>Copying table '{0}' from '{1}' as '{2}'</source>
         <translation>Kopiere Tabelle „{0}“ aus „{1}“ als „{2}“</translation>
     </message>

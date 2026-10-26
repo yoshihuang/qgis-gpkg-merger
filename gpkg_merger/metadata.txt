@@ -17,7 +17,7 @@ about=Merge any number of GeoPackages – with everything stored in them – int
     - The user interface follows the QGIS language setting: English, Traditional Chinese, Simplified Chinese, Japanese, Korean, German, French, Spanish.
     Works with QGIS 3.22+ and QGIS 4 (Qt6).
     Uses only GDAL/OGR which ships with QGIS; no extra Python packages needed.
-version=1.2.0
+version=1.2.1
 author=yoshi
 email=yoshi.hml@gmail.com
 tracker=https://github.com/yoshihuang/qgis-gpkg-merger/issues
@@ -29,7 +29,9 @@ icon=icon.png
 experimental=False
 deprecated=False
 hasProcessingProvider=no
-changelog=1.2.0
+changelog=1.2.1
+    - Fix "unable to open database: file:///…?mode=ro" on Windows when merging rasters, tables, metadata or projects.
+    1.2.0
     - Merges the complete GeoPackage: raster tiles, DEM (gridded coverage), vector tiles, plain tables, views, metadata, relations and QGIS projects stored in the file.
     - Stored QGIS projects are redirected to the merged file and follow renamed layers.
     1.1.0

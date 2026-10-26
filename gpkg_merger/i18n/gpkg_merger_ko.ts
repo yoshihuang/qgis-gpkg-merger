@@ -169,7 +169,7 @@
     </message>
     <message>
         <location filename="../dialog.py" line="416"/>
-        <location filename="../merge_core.py" line="529"/>
+        <location filename="../merge_core.py" line="547"/>
         <source>The output file must not be one of the input files.</source>
         <translation>출력 파일은 입력 파일 중 하나일 수 없습니다.</translation>
     </message>
@@ -298,12 +298,12 @@ Replace it?</source>
         <translation>지오메트리 없음</translation>
     </message>
     <message>
-        <location filename="../merge_core.py" line="522"/>
+        <location filename="../merge_core.py" line="540"/>
         <source>The merge plan contains errors; nothing was written.</source>
         <translation>병합 계획에 오류가 있어 아무것도 저장되지 않았습니다.</translation>
     </message>
     <message>
-        <location filename="../merge_core.py" line="524"/>
+        <location filename="../merge_core.py" line="542"/>
         <source>There is nothing to merge.</source>
         <translation>병합할 항목이 없습니다.</translation>
     </message>
@@ -318,137 +318,137 @@ Replace it?</source>
         <translation>벡터 타일</translation>
     </message>
     <message>
-        <location filename="../merge_core.py" line="621"/>
+        <location filename="../merge_core.py" line="639"/>
         <source>Done: {0}</source>
         <translation>완료: {0}</translation>
     </message>
     <message>
-        <location filename="../merge_core.py" line="360"/>
+        <location filename="../merge_core.py" line="378"/>
         <source>geometry type differs ({0} vs {1})</source>
         <translation>지오메트리 유형이 다름 ({0} / {1})</translation>
     </message>
     <message>
-        <location filename="../merge_core.py" line="365"/>
-        <location filename="../merge_core.py" line="368"/>
+        <location filename="../merge_core.py" line="383"/>
+        <location filename="../merge_core.py" line="386"/>
         <source>coordinate reference system differs ({0} vs {1})</source>
         <translation>좌표계가 다름 ({0} / {1})</translation>
     </message>
     <message>
-        <location filename="../merge_core.py" line="366"/>
-        <location filename="../merge_core.py" line="366"/>
+        <location filename="../merge_core.py" line="384"/>
+        <location filename="../merge_core.py" line="384"/>
         <source>none</source>
         <translation>없음</translation>
     </message>
     <message>
-        <location filename="../merge_core.py" line="376"/>
+        <location filename="../merge_core.py" line="394"/>
         <source>missing fields: {0}</source>
         <translation>누락된 필드: {0}</translation>
     </message>
     <message>
-        <location filename="../merge_core.py" line="378"/>
+        <location filename="../merge_core.py" line="396"/>
         <source>extra fields: {0}</source>
         <translation>추가 필드: {0}</translation>
     </message>
     <message>
-        <location filename="../merge_core.py" line="716"/>
+        <location filename="../merge_core.py" line="733"/>
         <source>Copying QGIS project '{0}' from '{1}' as '{2}'</source>
         <translation>'{1}'의 QGIS 프로젝트 '{0}'을(를) '{2}'(으)로 복사</translation>
     </message>
     <message>
-        <location filename="../merge_core.py" line="236"/>
-        <location filename="../merge_core.py" line="281"/>
-        <location filename="../merge_core.py" line="327"/>
-        <location filename="../merge_core.py" line="234"/>
+        <location filename="../merge_core.py" line="254"/>
+        <location filename="../merge_core.py" line="299"/>
+        <location filename="../merge_core.py" line="345"/>
+        <location filename="../merge_core.py" line="252"/>
         <source>Cannot open GeoPackage: {0}</source>
         <translation>GeoPackage를 열 수 없습니다: {0}</translation>
     </message>
     <message>
-        <location filename="../merge_core.py" line="381"/>
+        <location filename="../merge_core.py" line="399"/>
         <source>field '{0}' type differs ({1} vs {2})</source>
         <translation>필드 '{0}' 유형이 다름 ({1} / {2})</translation>
     </message>
     <message>
-        <location filename="../merge_core.py" line="461"/>
+        <location filename="../merge_core.py" line="479"/>
         <source>only vector and attribute layers can be appended</source>
         <translation>벡터 및 속성 레이어만 추가할 수 있음</translation>
     </message>
     <message>
-        <location filename="../merge_core.py" line="506"/>
+        <location filename="../merge_core.py" line="524"/>
         <source>Skipped '{0}' in '{1}': {2}</source>
         <translation>'{1}'의 '{0}' 건너뜀: {2}</translation>
     </message>
     <message>
-        <location filename="../merge_core.py" line="438"/>
+        <location filename="../merge_core.py" line="456"/>
         <source>Layer '{0}' of '{1}' renamed to '{2}'</source>
         <translation>'{1}'의 레이어 '{0}' → '{2}'(으)로 이름 변경</translation>
     </message>
     <message>
-        <location filename="../merge_core.py" line="598"/>
+        <location filename="../merge_core.py" line="616"/>
         <source>Copying layer styles from '{0}'</source>
         <translation>'{0}'의 레이어 스타일 복사</translation>
     </message>
     <message>
-        <location filename="../merge_core.py" line="686"/>
+        <location filename="../merge_core.py" line="703"/>
         <source>View '{0}' of '{1}' could not be re-created and was skipped: {2}</source>
         <translation>'{1}'의 뷰 '{0}'을(를) 다시 만들 수 없어 건너뜀: {2}</translation>
     </message>
     <message>
-        <location filename="../merge_core.py" line="689"/>
+        <location filename="../merge_core.py" line="706"/>
         <source>Copying view '{0}' from '{1}' as '{2}'</source>
         <translation>'{1}'의 뷰 '{0}'을(를) '{2}'(으)로 복사</translation>
     </message>
     <message>
-        <location filename="../merge_core.py" line="456"/>
+        <location filename="../merge_core.py" line="474"/>
         <source>Layer '{0}' of '{1}' is overwritten by '{2}'</source>
         <translation>'{1}'의 레이어 '{0}'은(는) '{2}'(으)로 덮어씀</translation>
     </message>
     <message>
-        <location filename="../merge_core.py" line="495"/>
+        <location filename="../merge_core.py" line="513"/>
         <source>Project '{0}' of '{1}' is overwritten by '{2}'</source>
         <translation>'{1}'의 프로젝트 '{0}'은(는) '{2}'(으)로 덮어씀</translation>
     </message>
     <message>
-        <location filename="../merge_core.py" line="501"/>
+        <location filename="../merge_core.py" line="519"/>
         <source>Project '{0}' of '{1}' renamed to '{2}'</source>
         <translation>'{1}'의 프로젝트 '{0}' → '{2}'(으)로 이름 변경</translation>
     </message>
     <message>
-        <location filename="../merge_core.py" line="567"/>
+        <location filename="../merge_core.py" line="585"/>
         <source>Copying '{0}' from '{1}' as '{2}'</source>
         <translation>'{1}'의 '{0}'을(를) '{2}'(으)로 복사</translation>
     </message>
     <message>
-        <location filename="../merge_core.py" line="578"/>
+        <location filename="../merge_core.py" line="596"/>
         <source>Appending '{0}' from '{1}' to '{2}'</source>
         <translation>'{1}'의 '{0}'을(를) '{2}'에 추가</translation>
     </message>
     <message>
-        <location filename="../merge_core.py" line="665"/>
+        <location filename="../merge_core.py" line="683"/>
         <source>Copying relations from '{0}'</source>
         <translation>'{0}'의 관계 복사</translation>
     </message>
     <message>
-        <location filename="../merge_core.py" line="645"/>
+        <location filename="../merge_core.py" line="663"/>
         <source>Copying raster '{0}' from '{1}' as '{2}'</source>
         <translation>'{1}'의 래스터 '{0}'을(를) '{2}'(으)로 복사</translation>
     </message>
     <message>
-        <location filename="../merge_core.py" line="659"/>
+        <location filename="../merge_core.py" line="677"/>
         <source>Index or trigger skipped: {0}</source>
         <translation>인덱스 또는 트리거 건너뜀: {0}</translation>
     </message>
     <message>
-        <location filename="../merge_core.py" line="470"/>
+        <location filename="../merge_core.py" line="488"/>
         <source>Layer '{0}': '{1}' cannot be appended to '{2}': {3}</source>
         <translation>레이어 '{0}': '{1}'을(를) '{2}'에 추가할 수 없음: {3}</translation>
     </message>
     <message>
-        <location filename="../merge_core.py" line="474"/>
+        <location filename="../merge_core.py" line="492"/>
         <source>{0} features of '{1}' in '{2}' appended to layer '{3}'</source>
         <translation>'{2}'의 '{1}' 피처 {0}개를 레이어 '{3}'에 추가</translation>
     </message>
     <message>
-        <location filename="../merge_core.py" line="650"/>
+        <location filename="../merge_core.py" line="668"/>
         <source>Copying table '{0}' from '{1}' as '{2}'</source>
         <translation>'{1}'의 테이블 '{0}'을(를) '{2}'(으)로 복사</translation>
     </message>
