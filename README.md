@@ -70,8 +70,14 @@ gpkg_merger/            the plugin (copy/symlink into your QGIS profile's python
 scripts/translations.py translation table (edit here)
 scripts/build_i18n.py   check strings, write .ts, compile .qm (needs lrelease)
 scripts/package.py      build dist/gpkg_merger-<version>.zip for plugins.qgis.org
+scripts/release_notes.py GitHub release notes = the version's section of CHANGELOG.md
 tests/                  unit tests:  python -m unittest discover tests
 ```
+
+Releasing: bump `version` and `changelog` in `gpkg_merger/metadata.txt`, add a
+`## <version>` section to `CHANGELOG.md`, push, then run Actions ▸ **release**.
+The release notes are taken from `CHANGELOG.md` (the job stops if the section is
+missing). After editing an older entry, run Actions ▸ **release notes**.
 
 Adding a language: add its code to `LANGS` in `scripts/translations.py`, add a
 column to every entry, add it to `SUPPORTED` in `gpkg_merger/i18n_util.py`, then

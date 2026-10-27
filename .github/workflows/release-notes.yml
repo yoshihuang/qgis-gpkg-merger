@@ -1,0 +1,34 @@
+name: release notes
+# Rewrites the notes of existing GitHub releases from CHANGELOG.md.
+# Run it from Actions ▸ release notes ▸ "Run workflow" after editing an older
+# CHANGELOG.md entry. Leave "version" empty to update every release.
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Version to update (e.g. 1.2.0); empty = all releases"
+        required: false
+        default: ""
+permissions:
+  contents: write
+jobs:
+  notes:
+    runs-on: ubuntu-24.04
+    env:
+      GH_TOKEN: ${{ github.token }}
+      ONLY: ${{ inputs.version }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: update release notes
+        run: |
+          set -e
+          for tag in $(gh release list --limit 200 --json tagName --jq '.[].tagName'); do
+            v="${tag#v}"
+            if [ -n "$ONLY" ] && [ "$v" != "$ONLY" ]; then continue; fi
+            if python3 scripts/release_notes.py "$v" > notes.md; then
+              gh release edit "$tag" --notes-file notes.md
+              echo "updated $tag"
+            else
+              echo "skipped $tag (no CHANGELOG.md section)"
+            fi
+          done
